@@ -1,0 +1,71 @@
+# SQL 작동 순서 / 실행 순서
+
+작성 순서: SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY
+실행 순서: FROM -> WhERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY
+
+# Date Type (데이터 타입)
+
+종류
+- INT (정수형 숫자) / ex) 나이, 숫자
+- vARCHAR (가변 길이 문자열) / ex) 이름: "홍길동", 이메일
+- DATE (날짜) / ex) 가입일: 2022-02-02
+- DECIMAL(p, s) (전체 p자리, 소수점 s 자리) / ex) 가격 205342.123
+- Boolean (참/거짓) / ex) 활성화 여부 True, False
+- TEXT (긴 문자열) / 게시글 내용
+
+
+# 스키마 (Schema) - DB 구조와 제약 조건 정의 설계도
+
+# PK (기본 키): 테이블 내에서 각 행을 유일하게 식별할 수 있는 열
+    규칙 1. 중복 값 존재 x 2. NULL 값 x
+
+# FK(외래 키): 다른 테이블의 PK(기본 키) 참조하는 열
+    FK 사용 시 두 테이블 연결, 테이블 관계 형성
+    다른 테이블 PK 참조 시 참조 대상이 존재해야함
+
+# 참조 무결성 (Referencetial Integrity): FK가 참조하는 값이 반드시 참조 대상 테이블의 Pk 안에 존재해야함.
+    존재하지 않는 갑을 참조하는 데이터는 저장 x  -> 데이터 간 관계 유효하게 유지
+
+# 정규화(Normalization): 데이터 중복 최소화, 데이터 무결성 높이기 위해 테이블을 체계적으로 분리 과정
+    중복 많을 시 수정할 때 다른 곳 빠뜨리는 오류, 정규화 사용 시 여러 테이블 분리 + FK 연결 시, 한 곳에서만 수정해도 일관성 있게 유지
+
+# RDB 세 가지 관계
+    1. 1:1 관계: 한 테이블의 레코드하나가 다른 테이블의 레코드 하나와 대응되는 관계 (보안,성능 목적 시 사용)
+    2. 1:N 관게: 한 테이브의 레코드 하나가 다른 테이블의 여러 레코드 연결 관계
+    3. N:M 관계: 양쪽테이블의 레코드 서로 여러 개와 연결될 수 있는 관계
+
+
+# DDL, DML
+    DDL(Data Definaition Language): DB구조 정의, 변경, 삭제 / CREATE, ALTER, DROP
+    DML(Data Manipulation Language): 테이블 내 데이터를 조회, 삽입, 수정, 삭제 / SELECT, INSERT, UPDATE, DELETE
+
+# 제약조건
+    PRIMARY KEY = 기본 키, 종복 X, NULL x
+    NOT NULL = NULL 값 저장 x
+    UNIQUE = 중복 값 저장 불가(NULL 허용)
+    DEFAULT = 값 입력되지 않으면 기본값 자동 출력
+    REFERENCES = 외래 키 참조 테이블 지정
+
+# DROP, DESCRIBE
+    DROP (삭제): 테이블과 그 안의 모든 데이터 영구적 삭제
+    DESCRIBE (테이블 구조 확인): \d 테이블 명 테이블의 열 구조, 데이터 타입, 제약 조건 확인
+
+# INSERT INTO - 테이블에 새로운 행 추가하는 DML 명령어
+    ex) INSERT INTO 테이블명(열1, 열2, 열3):
+        VALUES (값1, 값2, 값3)
+
+        insert 시 데이터 타입 맞지 않으면 오류 발생
+
+
+# SQL 기본 구조 
+1. SELECT: 테이블에서 원하는 열 선택해 데이터 조회 사용 / FROM: 데이터 가져올 테이블 지정
+2. DISTINCT (중복 값 제거): 열 값에 중복 있을 시 고유한 값만 남겨서 조회 가능
+3. WHERE: 모든 데이터가 아닌 특정 조건을 만족하는 행만 조회
+4. CASE WHEN: 조건에 따라 서로 다른 결과값 반환
+5. ORDER BY: 조회 결과를 특정 열로 기준 정렬
+
+# 연산자 LIKE, IN
+    LIKE 문자열 전후로 어떤 값이 와도 집계 가능 / IN 정확하게 문자열이 정해져인 문자인 경우만 집계
+
+# 오름차순, 내림차순
+    ACS, DECS
